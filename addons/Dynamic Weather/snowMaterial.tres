@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dsski4p48kbfj"]
+
+[ext_resource type="Shader" uid="uid://cq3s0sbirayij" path="res://Dynamic Weather/Shaders/snow.gdshader" id="1_th1a0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_th1a0")
+shader_parameter/snow_color = Color(0.92, 0.96, 1, 1)
+shader_parameter/softness = 0.45
+shader_parameter/arm_blend = 0.28

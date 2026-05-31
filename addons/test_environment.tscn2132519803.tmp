@@ -1,0 +1,301 @@
+[gd_scene format=3 uid="uid://dkg1h61wt3wb8"]
+
+[ext_resource type="Script" path="res://skybox_controller.gd" id="1_3kte8"]
+[ext_resource type="Script" path="res://WeatherManager.cs" id="1_g5lrn"]
+[ext_resource type="Shader" path="res://sky_box.gdshader" id="1_k4yy0"]
+[ext_resource type="Texture2D" uid="uid://b744dcsy4of22" path="res://sky_color_files/sun_view_gradient.png" id="2_d34ou"]
+[ext_resource type="Resource" uid="uid://bmn70deghaar4" path="res://ClearWeather.tres" id="2_xbsj7"]
+[ext_resource type="CompressedCubemap" uid="uid://c6bud7dfluibj" path="res://sky_color_files/moon_color_cubemap.jpg" id="2_yrph2"]
+[ext_resource type="Resource" uid="uid://kraqgvasxolg" path="res://StormWeather.tres" id="3_f7hem"]
+[ext_resource type="CompressedCubemap" uid="uid://qbkltcni12s6" path="res://sky_color_files/star_color_cubemap.png" id="3_ho4h1"]
+[ext_resource type="Texture2D" uid="uid://cn3ut3awit5ds" path="res://sky_color_files/view_zenith_gradient.png" id="4_yrph2"]
+[ext_resource type="Texture2D" uid="uid://2w0wvfv7lo8i" path="res://sky_color_files/sun_zenith_gradient.png" id="8_2tu31"]
+[ext_resource type="PackedScene" uid="uid://ds27r1gew3eih" path="res://Player.tscn" id="8_fr3r3"]
+[ext_resource type="Script" path="res://sun.gd" id="8_m0l1h"]
+[ext_resource type="Script" uid="uid://b3p5k15ugsefk" path="res://nimbo_stratus_system.gd" id="13_esyq8"]
+[ext_resource type="Script" path="res://cumulus_system.gd" id="15_2tu31"]
+[ext_resource type="Script" uid="uid://gqrdvw6m4uqe" path="res://stratus_system.gd" id="15_k360t"]
+[ext_resource type="Script" uid="uid://kfxcsi7wt0qy" path="res://alto_cumulus_system.gd" id="16_2tu31"]
+[ext_resource type="Script" path="res://cloud_ochestrator.gd" id="17_dd6co"]
+[ext_resource type="Shader" path="res://rain.gdshader" id="18_ffram"]
+[ext_resource type="Script" path="res://PrecipitaionSystem.gd" id="19_dd6co"]
+[ext_resource type="Script" path="res://storm_overlay.gd" id="21_bqfjy"]
+[ext_resource type="Shader" path="res://fog_volumee.gdshader" id="22_0yfye"]
+[ext_resource type="Material" uid="uid://dsski4p48kbfj" path="res://snowMaterial.tres" id="22_q8qvo"]
+[ext_resource type="Script" path="res://snow.gd" id="23_q8qvo"]
+[ext_resource type="Script" uid="uid://p3kfdbpk6435" path="res://thunder_controller.gd" id="24_idll8"]
+[ext_resource type="AudioStream" uid="uid://duwmnp63uj3nb" path="res://Audio Files/Thunder/THUNDER Effect 4.wav" id="25_u20j6"]
+[ext_resource type="AudioStream" uid="uid://ck7n80j1ffkef" path="res://Audio Files/Thunder/thunderEffect 1.wav" id="26_wxjxs"]
+[ext_resource type="AudioStream" uid="uid://cl7wct1lcgwsa" path="res://Audio Files/Thunder/thunderEffect2.wav" id="27_8bl3n"]
+[ext_resource type="AudioStream" uid="uid://gc2y7ikv4wcc" path="res://Audio Files/Thunder/trimmedlongThundereffect3.wav" id="28_dji4f"]
+[ext_resource type="Script" uid="uid://cg1ekyerc4vgl" path="res://rain_controller.gd" id="29_8bl3n"]
+[ext_resource type="AudioStream" uid="uid://drcj5m8x7m63" path="res://Audio Files/Rain/LightRain1.wav" id="30_8bsgp"]
+[ext_resource type="AudioStream" uid="uid://didv1vjygog2n" path="res://Audio Files/Rain/heavyrain1.wav" id="31_vn34g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k4yy0"]
+shader = ExtResource("1_k4yy0")
+shader_parameter/sun_dir = Vector3(-0.1905157, -0.97940457, -0.066862196)
+shader_parameter/moon_dir = Vector3(0.80112505, 0.59474266, -0.06693076)
+shader_parameter/sun_zenith_gradient = ExtResource("8_2tu31")
+shader_parameter/view_zenith_gradient = ExtResource("4_yrph2")
+shader_parameter/sun_view_gradient = ExtResource("2_d34ou")
+shader_parameter/sun_radius = 0.0210000009975
+shader_parameter/sun_color = Color(1, 1, 0.45490196, 1)
+shader_parameter/moon_radius = 0.05
+shader_parameter/moon_exposure = -0.9999992874999996
+shader_parameter/moon_cubemap = ExtResource("2_yrph2")
+shader_parameter/moon_word_to_object = Basis(1, 0, 0, 0, 0.96761227, -0.252441, 0, 0.252441, 0.96761227)
+shader_parameter/moon_orbit_speed = 0.2
+shader_parameter/moon_orbit_axis = Vector3(0.087, 0.996, 0)
+shader_parameter/star_cubemap = ExtResource("3_ho4h1")
+shader_parameter/star_exposure = 2.0000008549999997
+shader_parameter/star_power = 2.0000000475
+shader_parameter/star_latitude = 0.0
+shader_parameter/star_speed = 0.001
+shader_parameter/star_constellation_color = Color(0, 0.3, 0.6, 1)
+shader_parameter/cloud_coverage = 0.0
+shader_parameter/fog_density = 0.0
+shader_parameter/precipitation = 0.0
+shader_parameter/light_multiplier = 1.0
+shader_parameter/nimbo_lod = 0
+shader_parameter/nimbo_turbulence = 0.5
+shader_parameter/cirrus_weight = 0.0
+
+[sub_resource type="Sky" id="Sky_tctbl"]
+sky_material = SubResource("ShaderMaterial_k4yy0")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_hu1ts"]
+background_mode = 2
+sky = SubResource("Sky_tctbl")
+ambient_light_source = 3
+ambient_light_color = Color(0.005, 0.005, 0.008, 1)
+ambient_light_energy = 0.0
+tonemap_mode = 2
+fog_mode = 1
+fog_density = 1.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_gi_inject = 0.0
+volumetric_fog_length = 512.0
+volumetric_fog_ambient_inject = 0.2
+volumetric_fog_sky_affect = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_esyq8"]
+shading_mode = 2
+albedo_color = Color(0, 0.7490196, 0.003921569, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tu31"]
+shader = ExtResource("1_k4yy0")
+shader_parameter/sun_dir = Vector3(0, 0, 0)
+shader_parameter/moon_dir = Vector3(0, 0, 0)
+shader_parameter/sun_radius = 0.05
+shader_parameter/sun_color = Color(1, 1, 1, 1)
+shader_parameter/moon_radius = 0.05
+shader_parameter/moon_exposure = 0.0
+shader_parameter/moon_word_to_object = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
+shader_parameter/moon_orbit_speed = 0.1
+shader_parameter/moon_orbit_axis = Vector3(0, 1, 0)
+shader_parameter/star_exposure = 0.0
+shader_parameter/star_power = 1.0
+shader_parameter/star_latitude = 0.0
+shader_parameter/star_speed = 0.001
+shader_parameter/star_constellation_color = Color(0, 0.3, 0.6, 1)
+shader_parameter/cloud_coverage = 0.0
+shader_parameter/fog_density = 0.0
+shader_parameter/precipitation = 0.0
+shader_parameter/light_multiplier = 1.0
+shader_parameter/nimbo_lod = 0
+shader_parameter/nimbo_turbulence = 0.5
+shader_parameter/cirrus_weight = 0.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dd6co"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 0.1, 50)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 14.0
+initial_velocity_max = 20.0
+scale_max = 1.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fg8y"]
+render_priority = 0
+shader = ExtResource("18_ffram")
+shader_parameter/drop_opacity = 0.6
+shader_parameter/rain_color = Color(0.72, 0.82, 0.95, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_bqfjy"]
+material = SubResource("ShaderMaterial_5fg8y")
+size = Vector2(0.03, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dd6co"]
+render_priority = 0
+shader = ExtResource("18_ffram")
+shader_parameter/drop_opacity = 0.6
+shader_parameter/rain_color = Color(0.72, 0.82, 0.95, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q8qvo"]
+render_priority = 0
+shader = ExtResource("22_0yfye")
+shader_parameter/fog_color = Color(0.18071875, 0.19943887, 0.22941956, 1)
+shader_parameter/fog_density = 0.00999999977648
+shader_parameter/storm_weight = 0.0
+shader_parameter/fog_radius = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_idll8"]
+material = SubResource("ShaderMaterial_q8qvo")
+radius = 2.0
+height = 4.0
+
+[sub_resource type="Curve" id="Curve_idll8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.85, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_u20j6"]
+curve = SubResource("Curve_idll8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w28gr"]
+emission_shape = 3
+emission_box_extents = Vector3(50, 1, 50)
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(0, -1, 0)
+spread = 6.0
+initial_velocity_min = 1.8
+initial_velocity_max = 6.0
+gravity = Vector3(0, -9, 0)
+scale_min = 0.06
+scale_max = 0.19999999
+alpha_curve = SubResource("CurveTexture_u20j6")
+turbulence_enabled = true
+turbulence_noise_scale = 2.0
+turbulence_influence_min = 0.120000005
+turbulence_influence_max = 0.28
+
+[sub_resource type="QuadMesh" id="QuadMesh_wxjxs"]
+material = ExtResource("22_q8qvo")
+
+[node name="WeatherManger" type="Node3D" unique_id=1394475500 node_paths=PackedStringArray("_precipitationSystem", "_snowSystem")]
+script = ExtResource("1_g5lrn")
+CurrentState = ExtResource("2_xbsj7")
+TargetState = ExtResource("3_f7hem")
+snowStartPrecip = 0.6
+snowFullPrecip = 0.85
+rainEndPrecip = 0.75
+stormPrecipWeight = 0.6
+_precipitationSystem = NodePath("Rain")
+_snowSystem = NodePath("Snow")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1588244095 node_paths=PackedStringArray("weather_manager", "nimbostratus_system")]
+environment = SubResource("Environment_hu1ts")
+script = ExtResource("1_3kte8")
+weather_manager = NodePath("..")
+nimbostratus_system = NodePath("../NimboStratusSystem")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1004478165]
+use_collision = true
+size = Vector3(1000, 0.1, 1000)
+material = SubResource("StandardMaterial3D_esyq8")
+
+[node name="moon" type="Node3D" parent="." unique_id=669903864]
+transform = Transform3D(0.59384465, -0.07447878, 0.80112505, -0.80382794, -0.011893324, 0.59474266, -0.03476769, -0.9971517, -0.06693076, 1.6033409, 8.70036, 2.7216718)
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=470972078]
+transform = Transform3D(0.58610743, -0.78751636, -0.19051549, -0.1681202, 0.111814216, -0.9794038, 0.7926005, 0.60606563, -0.06685983, 0, 3.345, 0)
+light_energy = 16.0
+script = ExtResource("8_m0l1h")
+day_length = 20.0
+
+[node name="Player" parent="." unique_id=2079791595 instance=ExtResource("8_fr3r3")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1886757340]
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer" unique_id=364651900]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 0.29803923, 1, 1)
+theme_override_font_sizes/font_size = 18
+
+[node name="NimboStratusSystem" type="Node3D" parent="." unique_id=634312483 node_paths=PackedStringArray("weather_manager", "sun_light", "world_environment")]
+script = ExtResource("13_esyq8")
+sky_material = SubResource("ShaderMaterial_2tu31")
+weather_manager = NodePath("..")
+sun_light = NodePath("../Sun")
+world_environment = NodePath("../WorldEnvironment")
+ambient_base_energy = 0.1
+ambient_dim_min = 0.3
+
+[node name="StratusSystem" type="Node3D" parent="." unique_id=1807698233 node_paths=PackedStringArray("weather_manager")]
+script = ExtResource("15_k360t")
+sun_node_path = NodePath("../Sun")
+weather_manager = NodePath("..")
+
+[node name="CumulusSystem" type="Node3D" parent="." unique_id=1217526182 node_paths=PackedStringArray("weather_manager")]
+script = ExtResource("15_2tu31")
+weather_manager = NodePath("..")
+cloud_height = 400.0
+
+[node name="AltoCumulusSystem" type="Node3D" parent="." unique_id=74886571 node_paths=PackedStringArray("weather_manager")]
+script = ExtResource("16_2tu31")
+sun_node_path = NodePath("../Sun")
+weather_manager = NodePath("..")
+gap_sharpness = 0.5
+clump_strength = 0.3
+wind_speed = 7.0
+min_coverage_threshold = 0.0
+max_coverage_threshold = 0.0
+coverage_smoothness = 0.2
+target_puff_scale = 0.924
+target_gap_sharpness = 0.263
+shape_speed = 1.847
+
+[node name="CloudOchestrator" type="Node3D" parent="." unique_id=1423138923]
+script = ExtResource("17_dd6co")
+
+[node name="Rain" type="GPUParticles3D" parent="." unique_id=30807616 node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0)
+amount = 6000
+randomness = 0.5
+fixed_fps = 0
+process_material = SubResource("ParticleProcessMaterial_dd6co")
+draw_pass_1 = SubResource("QuadMesh_bqfjy")
+script = ExtResource("19_dd6co")
+player = NodePath("../Player")
+streak_material = SubResource("ShaderMaterial_dd6co")
+
+[node name="stormFog" type="Node3D" parent="." unique_id=173980207 node_paths=PackedStringArray("sun")]
+script = ExtResource("21_bqfjy")
+sun = NodePath("../Sun")
+day_fog_color = Color(0.22573084, 0.24482903, 0.2893584, 1)
+night_fog_color = Color(0.704679, 0.7396804, 0.84122044, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="stormFog" unique_id=640896152]
+mesh = SubResource("SphereMesh_idll8")
+
+[node name="Snow" type="GPUParticles3D" parent="." unique_id=963123509 node_paths=PackedStringArray("player")]
+amount = 1
+lifetime = 7.0
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_w28gr")
+draw_pass_1 = SubResource("QuadMesh_wxjxs")
+script = ExtResource("23_q8qvo")
+player = NodePath("../Player")
+flake_material = ExtResource("22_q8qvo")
+
+[node name="ThunderController" type="Node3D" parent="." unique_id=1197985666 node_paths=PackedStringArray("lightning_light")]
+script = ExtResource("24_idll8")
+thunder_sounds = Array[AudioStream]([ExtResource("25_u20j6"), ExtResource("26_wxjxs"), ExtResource("27_8bl3n"), ExtResource("28_dji4f")])
+lightning_light = NodePath("../Lightning")
+
+[node name="Lightning" type="DirectionalLight3D" parent="." unique_id=1761370421]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 20, 0)
+visible = false
+light_color = Color(0.78162664, 0.9510338, 1, 1)
+sky_mode = 1
+
+[node name="RainController" type="Node3D" parent="." unique_id=156386869]
+script = ExtResource("29_8bl3n")
+light_rain_sound = ExtResource("30_8bsgp")
+heavy_rain_sound = ExtResource("31_vn34g")
+crossfade_speed = 3.0

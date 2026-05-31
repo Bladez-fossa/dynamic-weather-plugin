@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b2bol77ylyjk5"]
+
+[ext_resource type="Shader" uid="uid://buxsajsec3dat" path="res://Dynamic Weather/Shaders/storm_mist_shader.gdshader" id="1_mni35"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mni35")
+shader_parameter/fog_color = Color(0.6, 0.63, 0.68, 1)
+shader_parameter/opacity = 0.0

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" format=3 uid="uid://kraqgvasxolg"]
+
+[ext_resource type="Script" uid="uid://c3p8igqb8bhml" path="res://Dynamic Weather/WeatherState.cs" id="1_xxasp"]
+
+[resource]
+script = ExtResource("1_xxasp")
+CloudCoverage = 1.0
+Precipitation = 1.0
+FogDensity = 0.8
+AltocumulusWeight = 1.0
+RainIntensity = 1.0
+metadata/_custom_type_script = "uid://c3p8igqb8bhml"

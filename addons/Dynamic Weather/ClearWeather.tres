@@ -1,0 +1,7 @@
+[gd_resource type="Resource" format=3 uid="uid://bmn70deghaar4"]
+
+[ext_resource type="Script" uid="uid://c3p8igqb8bhml" path="res://Dynamic Weather/WeatherState.cs" id="1_7ow42"]
+
+[resource]
+script = ExtResource("1_7ow42")
+metadata/_custom_type_script = "uid://c3p8igqb8bhml"

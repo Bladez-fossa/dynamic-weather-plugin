@@ -1,0 +1,12 @@
+[gd_resource type="QuadMesh" format=3 uid="uid://1nolxpp04tg7"]
+
+[ext_resource type="Shader" uid="uid://buxsajsec3dat" path="res://Dynamic Weather/Shaders/storm_mist_shader.gdshader" id="1_2vesd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44bop"]
+render_priority = 0
+shader = ExtResource("1_2vesd")
+shader_parameter/fog_color = Color(0.6, 0.63, 0.68, 1)
+shader_parameter/opacity = 0.0
+
+[resource]
+material = SubResource("ShaderMaterial_44bop")
