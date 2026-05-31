@@ -66,46 +66,6 @@ Every cloud type has its own Inspector section with parameters like:
 
 You can create your own weather states by editing the `WeatherState` resource.
 
-## 📁 Project Structure
-addons/
-└── Dynamic Weather/
-├── plugin.cfg
-├── plugin.gd
-├── weather_state.cs
-├── weather_manager.cs
-├── cloud_ochestrator.gd
-├── base_cloud_controller.gd
-├── nimbostratus.gd
-├── stratus.gd
-├── cumulus.gd
-├── altocumulus.gd
-├── fog_volume.gd
-├── rain.gd
-├── snow.gd
-├── thunder_controller.gd
-├── rain_audio_controller.gd
-├── moon.gd
-├── sun.gd
-├── storm_overlay_fog.gd
-├── shaders/
-│ ├── nimboStratus_shell.gdshader
-│ ├── stratus_shader.gdshader
-│ ├── cumulus_shader.gdshader
-│ ├── altocumulus.gdshader
-│ ├── fog_volumee.gdshader
-│ ├── rain_streak.gdshader
-│ └── snow_flake.gdshader
-├── scenes/
-│ └── weather_system.tscn
-└── audio/
-├── thunder1.ogg
-├── thunder2.ogg
-├── rain_light.ogg
-└── rain_heavy.ogg
-
-
-
-
 ## License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
