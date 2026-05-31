@@ -1,0 +1,14 @@
+# Godot 4+ specific ignores
+.godot/
+*.import
+*.translation
+export_presets.cfg
+.mono/
+.vscode/
+*.sln
+*.csproj
+*.user
+*.DotSettings
+
+project.godot
+.editorconfig
