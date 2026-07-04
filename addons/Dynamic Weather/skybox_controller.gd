@@ -1,5 +1,5 @@
-
 @tool
+class_name WorldEnv
 extends WorldEnvironment
 @export var weather_manager : Node
 @export var nimbostratus_system : Node 

@@ -160,7 +160,7 @@ script = ExtResource("10_66gt7")
 weather_manager = NodePath("..")
 nimbostratus_system = NodePath("../NimboStratusSystem")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1004478165]
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1004478165]
 use_collision = true
 size = Vector3(1000, 0.1, 1000)
 material = SubResource("StandardMaterial3D_esyq8")
