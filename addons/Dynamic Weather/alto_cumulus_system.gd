@@ -1,3 +1,4 @@
+class_name AltoCumulusSystem
 extends BaseCloudController
 
 @export var coverage_speed: float = 1.2

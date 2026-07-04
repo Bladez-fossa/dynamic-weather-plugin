@@ -35,7 +35,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k4yy0"]
 shader = ExtResource("4_nl4eu")
-shader_parameter/sun_dir = Vector3(-0.1905157, -0.97940457, -0.066862196)
+shader_parameter/sun_dir = Vector3(-0.19051623, 0.9546989, -0.22859022)
 shader_parameter/moon_dir = Vector3(0.80112505, 0.59474266, -0.06693076)
 shader_parameter/sun_zenith_gradient = ExtResource("8_v4bmk")
 shader_parameter/view_zenith_gradient = ExtResource("9_i5xcw")
@@ -146,11 +146,12 @@ size = Vector2(0.1, 0.6)
 script = ExtResource("1_1yj7u")
 CurrentState = ExtResource("2_ss58c")
 TargetState = ExtResource("3_4tdbr")
+TransitionDuration = 3.0
 _precipitationSystem = NodePath("Rain")
 _snowSystem = NodePath("Snow")
-snowStartPrecip = 0.7
-snowFullPrecip = 0.85
-rainEndPrecip = 0.85
+snowStartPrecip = 0.5
+snowFullPrecip = 0.8
+rainEndPrecip = 0.3
 stormPrecipWeight = 0.6
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1588244095 node_paths=PackedStringArray("weather_manager", "nimbostratus_system")]
@@ -169,7 +170,7 @@ transform = Transform3D(0.59384465, -0.07447878, 0.80112505, -0.80382794, -0.011
 script = ExtResource("11_ss58c")
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=470972078]
-transform = Transform3D(0.58610743, -0.78751636, -0.19051549, -0.1681202, 0.111814216, -0.9794038, 0.7926005, 0.60606563, -0.06685983, 0, 3.345, 0)
+transform = Transform3D(0.5861058, -0.7875173, -0.19051617, -0.07617992, -0.28765708, 0.9546957, -0.8066469, -0.54504114, -0.22859842, 0, 3.345, 0)
 light_energy = 16.0
 script = ExtResource("11_4hp4i")
 day_length = 20.0
@@ -211,6 +212,8 @@ shape_speed = 1.847
 
 [node name="CloudOchestrator" type="Node3D" parent="." unique_id=1423138923]
 script = ExtResource("17_756og")
+update_threshold = 0.05
+min_push_interval = 6.0
 
 [node name="stormFog" type="Node3D" parent="." unique_id=173980207]
 script = ExtResource("20_0rfpv")

@@ -1,3 +1,4 @@
+class_name CumulusSystem
 extends BaseCloudController
 
 # ── Cumulus Behaviour ───────────────────────────────────────────────────────────

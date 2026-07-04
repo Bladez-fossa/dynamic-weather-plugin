@@ -46,6 +46,7 @@ public partial class WeatherManager : Node3D
 			return;
 		}
 		GD.Print("✅ Weather states are assigned in the inspector!");
+		GD.Print("Snow system: ", _snowSystem);
 		SetWeather(TargetState);
 	}
 
@@ -91,8 +92,8 @@ public partial class WeatherManager : Node3D
 
 		bool rainChanged = Mathf.Abs(rain    - _lastRainIntensity) > 0.005f
 						|| Mathf.Abs(drizzle - _lastDrizzleBlend)  > 0.005f;
-		bool snowChanged = Mathf.Abs(snow    - _lastSnowIntensity) > 0.005f
-						|| Mathf.Abs(wind    - _lastWindSpeed)      > 0.005f;
+		bool snowChanged = Mathf.Abs(snow    - _lastSnowIntensity) > 0.0005f
+						|| Mathf.Abs(wind    - _lastWindSpeed)      > 0.0005f;
 
 		if (rainChanged)
 		{
@@ -103,6 +104,7 @@ public partial class WeatherManager : Node3D
 
 		if (snowChanged)
 		{
+
 			_snowSystem?.Call("set_snow", snow, wind);
 			_lastSnowIntensity = snow;
 			_lastWindSpeed     = wind;
@@ -147,26 +149,37 @@ public partial class WeatherManager : Node3D
 		_transitionTimer = 0.0f;
 	}
 
-	private void DeriveRainFromClouds()
-	{
-		float nimbo   = CurrentState.NimboWeight;
-		float stratus = CurrentState.StratusWeight;
-		float precip  = CurrentState.Precipitation;
+private void DeriveRainFromClouds()
 
-		CurrentState.WindSpeed = Mathf.Clamp(CurrentState.WindSpeed, -1.0f, 1.0f);
+{
+	float nimbo   = CurrentState.NimboWeight;
+	float stratus = CurrentState.StratusWeight;
+	float precip  = CurrentState.Precipitation;
 
-		CurrentState.RainIntensity = nimbo;
-		CurrentState.DrizzleBlend  = Mathf.Clamp(stratus - nimbo, 0f, 1f);
+	// Clamp wind
+	CurrentState.WindSpeed = Mathf.Clamp(CurrentState.WindSpeed, -1.0f, 1.0f);
 
-		float snowRaw = Mathf.InverseLerp(snowStartPrecip, snowFullPrecip, precip);
-		CurrentState.SnowIntensity = Mathf.Clamp(snowRaw, 0f, 1f) * nimbo;
+	// Drizzle comes from stratus clouds that are not producing heavy precipitation.
+	CurrentState.DrizzleBlend = Mathf.Clamp(stratus - nimbo, 0f, 1f);
 
-		float rainFade = Mathf.Clamp(
-			Mathf.InverseLerp(rainEndPrecip, snowStartPrecip, precip), 0f, 1f);
-		CurrentState.RainIntensity *= rainFade;
-		 if (CurrentState.RainIntensity > 0.3f){
-			CurrentState.SnowIntensity = 0f;}
-	}
+	// ----------------------------------------------------
+	// Determine how much of the precipitation is snow.
+	//
+	// precip <= snowStartPrecip  -> all rain
+	// precip >= snowFullPrecip   -> all snow
+	// between them               -> smooth blend
+	// ----------------------------------------------------
+	float snowFactor = Mathf.Clamp(
+		Mathf.InverseLerp(snowStartPrecip, snowFullPrecip, precip),
+		0f,
+		1f);
+
+	float rainFactor = 1.0f - snowFactor;
+
+	// Apply cloud coverage
+	CurrentState.RainIntensity = rainFactor * nimbo;
+	CurrentState.SnowIntensity = snowFactor * nimbo;
+}
 
 	private void InterpolateState(float t)
 	{

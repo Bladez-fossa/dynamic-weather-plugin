@@ -1,3 +1,4 @@
+class_name StormFog
 extends BaseCloudController
 
 @export var day_fog_color: Color = Color(0.78, 0.80, 0.84, 1.0)

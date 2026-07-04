@@ -1,3 +1,4 @@
+class_name CloudOrchestrator
 extends Node
 
 # ── Noise settings ────────────────────────────────────────────────────────────

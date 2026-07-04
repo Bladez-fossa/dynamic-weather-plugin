@@ -1,3 +1,4 @@
+class_name SnowSytem
 extends GPUParticles3D
 
 @export_category("Snow Appearance")

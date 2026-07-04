@@ -1,3 +1,4 @@
+class_name RainController
 extends GPUParticles3D
 
 @export_category("Rain Appearance")

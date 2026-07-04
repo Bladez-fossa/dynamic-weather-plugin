@@ -1,3 +1,4 @@
+class_name MoonSystem
 extends Node3D
 
 ## Speed of the moon's orbit in radians per second. Higher = faster.

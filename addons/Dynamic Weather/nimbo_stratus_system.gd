@@ -1,3 +1,4 @@
+class_name NimboStratus
 extends BaseCloudController
 
 # ── Nimbostratus Behaviour ──────────────────────────────────────────────────────

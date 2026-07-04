@@ -1,3 +1,4 @@
+class_name Sunsystem
 extends DirectionalLight3D
 
 @export_range(0.0, 1.0) var time_of_day: float = 0.5   # start at noon (0.5)
